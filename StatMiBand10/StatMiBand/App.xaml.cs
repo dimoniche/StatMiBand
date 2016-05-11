@@ -7,6 +7,7 @@ using Template10.Common;
 using System;
 using System.Linq;
 using Windows.UI.Xaml.Data;
+using Microsoft.OneDrive.Sdk;
 
 namespace StatMiBand
 {
@@ -16,6 +17,8 @@ namespace StatMiBand
     [Bindable]
     sealed partial class App : Template10.Common.BootStrapper
     {
+        public IOneDriveClient OneDriveClient { get; set; }
+
         public App()
         {
             //Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
