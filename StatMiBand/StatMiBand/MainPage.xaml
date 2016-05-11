@@ -7,20 +7,35 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlyoutBase.AttachedFlyout="{StaticResource menu}">
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button_Click" RenderTransformOrigin="0.323,2.531" Margin="10,10,0,0"/>
-        <Hub Header="Hub">
-            <HubSection Header="HubSection 0">
-                <DataTemplate>
-                    <Grid/>
-                </DataTemplate>
-            </HubSection>
-            <HubSection Header="HubSection 1">
-                <DataTemplate>
-                    <Grid/>
-                </DataTemplate>
-            </HubSection>
-        </Hub>
-
-    </Grid>
+    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="150">
+        <SplitView.Pane>
+            <StackPanel Background="Gray">
+                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
+                    Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Сон" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Шаг" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Бег" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+                <TextBlock Text="SplitView Basic" FontSize="54" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>
+  
