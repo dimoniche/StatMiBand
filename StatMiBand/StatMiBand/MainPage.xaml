@@ -7,8 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="51,60,0,0" VerticalAlignment="Top" Click="button_Click"/>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlyoutBase.AttachedFlyout="{StaticResource menu}">
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button_Click" RenderTransformOrigin="0.323,2.531" Margin="10,10,0,0"/>
+        <Hub Header="Hub">
+            <HubSection Header="HubSection 0">
+                <DataTemplate>
+                    <Grid/>
+                </DataTemplate>
+            </HubSection>
+            <HubSection Header="HubSection 1">
+                <DataTemplate>
+                    <Grid/>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
 
     </Grid>
 </Page>

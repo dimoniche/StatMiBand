@@ -4,5 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StatMiBand"
     RequestedTheme="Light">
+    <Application.Resources>
+        <MenuFlyout x:Key="menu"/>
+    </Application.Resources>
 
 </Application>
