@@ -17,7 +17,8 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>StatMiBand_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>StatMiBand_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>6C8544747B834107E2C6C49BD3B8B1EBC50838FE</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -93,6 +94,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="StatMiBand_StoreKey.pfx" />
     <None Include="StatMiBand_TemporaryKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
@@ -131,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Help.htm" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

@@ -50,7 +50,7 @@
 
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="Main Page">
+                             RelativePanel.AlignTopWithPanel="True" Text="Main Page" HorizontalAlignment="Right" Width="360">
 
             <!--  secondary commands  -->
             <controls:PageHeader.SecondaryCommands>
