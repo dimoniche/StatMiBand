@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using Windows.UI.Xaml.Data;
 using Microsoft.OneDrive.Sdk;
+using System.Diagnostics;
 
 namespace StatMiBand
 {
@@ -60,8 +61,36 @@ namespace StatMiBand
             // long-running startup tasks go here
             await Task.Delay(1000);
 
-            NavigationService.Navigate(typeof(Views.MainPage));
+            NavigationService.Navigate(typeof(Views.SleepPage));
             await Task.CompletedTask;
+
+            InitializeClient();
+        }
+
+        private readonly string[] scopes = new string[] { "onedrive.readonly", "wl.offline_access", "wl.signin" };
+
+        private async void InitializeClient()
+        {
+            if (((App)Application.Current).OneDriveClient == null)
+            {
+                var client = OneDriveClientExtensions.GetUniversalClient(this.scopes) as OneDriveClient;
+
+                try
+                {
+                    await client.AuthenticateAsync();
+                    ((App)Application.Current).OneDriveClient = client;
+                }
+                catch (OneDriveException exception)
+                {
+                    // Swallow the auth exception but write message for debugging.
+                    Debug.WriteLine(exception.Error.Message);
+                    client.Dispose();
+                }
+            }
+            else
+            {
+
+            }
         }
     }
 }

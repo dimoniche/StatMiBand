@@ -14,17 +14,42 @@
     <Controls:HamburgerMenu x:Name="MyHamburgerMenu">
 
         <Controls:HamburgerMenu.PrimaryButtons>
-            <!--  mainpage button  -->
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MainPage" 
+            <!--  dream button  -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:SleepPage" 
                                           AutomationProperties.Name="Jerry"
                                           >
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48"
                                 Symbol="Home" />
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
-                               Text="Home" />
+                               Text="Sleeping" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+
+            <!--  run button  -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:RunPage" 
+                                          AutomationProperties.Name="Jerry"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="Home" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Runing" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <!--  step button  -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:StepPage" 
+                                          AutomationProperties.Name="Jerry"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="Home" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Working" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
         </Controls:HamburgerMenu.PrimaryButtons>
 
         <Controls:HamburgerMenu.SecondaryButtons>
