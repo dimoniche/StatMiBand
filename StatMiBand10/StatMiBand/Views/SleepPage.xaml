@@ -60,6 +60,14 @@
             </controls:PageHeader.SecondaryCommands>
 
         </controls:PageHeader>
+        <Pivot Margin="0,48,0,0">
+            <PivotItem Header="Summary">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="Details">
+                <Grid/>
+            </PivotItem>
+        </Pivot>
 
     </RelativePanel>
 </Page>
