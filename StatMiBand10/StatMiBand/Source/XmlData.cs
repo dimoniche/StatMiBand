@@ -10,10 +10,12 @@ namespace StatMiBand.Source
 {
     class JsonData
     {
-        int Version;
-        DateTime TimeStamp;
+        public int Version;
+        public DateTime TimeStamp;
 
-        List<Days> Days;
+        public List<Days> Days;
+
+        public static Exception InvalidVersion { get; private set; }
 
         public static JsonData FromJson(JObject objects)
         {
@@ -24,6 +26,7 @@ namespace StatMiBand.Source
                 if (obj.Key == "Version")
                 {
                     int.TryParse(obj.Value.ToString(), out data.Version);
+                    if (data.Version > 1) throw InvalidVersion;
                 }
                 else if(obj.Key == "TimeStamp")
                 {
@@ -43,12 +46,12 @@ namespace StatMiBand.Source
 
     class Days
     {
-        DateTime Date;
-        int Steps;
-        int StepsGoal;
-        int SleepMinutes;
-        int SleepGoalMinutes;
-        bool WasRunning;
+        public DateTime Date;
+        public int Steps;
+        public int StepsGoal;
+        public int SleepMinutes;
+        public int SleepGoalMinutes;
+        public bool WasRunning;
 
         public static Days FromJson(JToken values)
         {

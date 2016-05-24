@@ -63,13 +63,40 @@ namespace StatMiBand.Source
             }
             catch (Exception e)
             {
+                if(e == JsonData.InvalidVersion)
+                {
 
+                }
             }
         }
 
         public void ParseJsonData()
         {
             data = JsonData.FromJson(JObject.Parse(stringData));
+        }
+
+        public List<int> GetSteps()
+        {
+            List<int> steps = new List<int>();
+
+            foreach(Days day in data.Days)
+            {
+                steps.Add(day.Steps);
+            }
+
+            return steps;
+        }
+
+        public List<int> GetSleep()
+        {
+            List<int> sleep = new List<int>();
+
+            foreach (Days day in data.Days)
+            {
+                sleep.Add(day.SleepMinutes);
+            }
+
+            return sleep;
         }
     }
 }
