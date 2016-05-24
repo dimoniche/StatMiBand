@@ -1,7 +1,9 @@
 ﻿using Microsoft.OneDrive.Sdk;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +15,14 @@ namespace StatMiBand.Source
         public IOneDriveClient OneDriveClient { get; set; }
         private readonly string[] scopes = new string[] { "onedrive.readonly", "wl.offline_access", "wl.signin" };
 
-        String xmlData;
+        String stringData;
+
+        JsonData data;
 
         public SourceData()
         {
             InitializeClient();
+            data = new JsonData();
         }
 
         private async void InitializeClient()
@@ -52,7 +57,9 @@ namespace StatMiBand.Source
                 byte[] buffer = new byte[stream.Length];
                 stream.Read(buffer, 0, (int)stream.Length);
 
-                xmlData = System.Text.Encoding.UTF8.GetString(buffer);
+                stringData = System.Text.Encoding.UTF8.GetString(buffer);
+
+                ParseJsonData();
             }
             catch (Exception e)
             {
@@ -60,5 +67,9 @@ namespace StatMiBand.Source
             }
         }
 
+        public void ParseJsonData()
+        {
+            data = JsonData.FromJson(JObject.Parse(stringData));
+        }
     }
 }
