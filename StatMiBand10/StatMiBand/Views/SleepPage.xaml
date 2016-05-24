@@ -5,6 +5,7 @@
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
+      xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:StatMiBand.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -24,7 +25,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--  TODO: change properties for narrow view  -->
-                        
+
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -33,7 +34,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--  TODO: change properties for normal view  -->
-                        
+
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -42,7 +43,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--  TODO: change properties for wide view  -->
-                        
+
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -68,7 +69,18 @@
                 <Grid/>
             </PivotItem>
         </Pivot>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="64.6666641235352" Margin="40,140,-40.333,-140" Click="button_Click"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Top" Width="64.6666641235352" Margin="40,140,-40.667,-140" Click="button_Click"/>
+
+        <Charting:Chart 
+    x:Name="PieChart" 
+    HorizontalAlignment="Left" 
+    VerticalAlignment="Top" 
+    Margin="43,215,-198,-330" Height="260" Width="275" >
+            <Charting:PieSeries Margin="0" 
+         IndependentValuePath="Name" 
+         DependentValuePath="Amount" 
+         IsSelectionEnabled="True"/>
+        </Charting:Chart>
 
     </RelativePanel>
 </Page>

@@ -5,6 +5,7 @@
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.0.3",
     "Newtonsoft.Json": "8.0.3",
     "Template10": "1.1.8",
+    "WinRTXamlToolkit.Controls.DataVisualization": "2.0.0",
     "WinRTXamlToolkit.Controls.DataVisualization.UWP": "2.0.0"
   },
   "frameworks": {
