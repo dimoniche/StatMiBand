@@ -68,6 +68,7 @@
                 <Grid/>
             </PivotItem>
         </Pivot>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="64.6666641235352" Margin="40,140,-40.333,-140" Click="button_Click"/>
 
     </RelativePanel>
 </Page>
