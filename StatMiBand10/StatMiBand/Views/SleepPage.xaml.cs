@@ -16,6 +16,7 @@ namespace StatMiBand.Views
 {
     public sealed partial class SleepPage : Page
     {
+        SourceData data;
 
         public SleepPage()
         {
@@ -23,28 +24,47 @@ namespace StatMiBand.Views
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void OnStart(object sender, RoutedEventArgs e)
         {
-            SourceData data = ((App)Application.Current).XmlData;
+            data = ((App)Application.Current).XmlData;
 
-            Random rand = new Random();
-            System.Collections.Generic.List<FinancialStuff> financialStuffList = new List<FinancialStuff>();
-            financialStuffList.Add(new FinancialStuff() { Name = "MSFT", Amount = rand.Next(0, 200) });
-            financialStuffList.Add(new FinancialStuff() { Name = "AAPL", Amount = rand.Next(0, 200) });
-            financialStuffList.Add(new FinancialStuff() { Name = "GOOG", Amount = rand.Next(0, 200) });
-            financialStuffList.Add(new FinancialStuff() { Name = "BBRY", Amount = rand.Next(0, 200) });
-            (PieChart.Series[0] as PieSeries).ItemsSource = financialStuffList;
-            //(ColumnChart.Series[0] as ColumnSeries).ItemsSource = financialStuffList;
-            //(LineChart.Series[0] as LineSeries).ItemsSource = financialStuffList;
+            foreach (int year in data.GetYearsInData())
+            {
+                Years.Items.Add(year);
+            }
+
+            Years.SelectedIndex = 0;
         }
+        
+        private void OnStartDetail(object sender, RoutedEventArgs e)
+        {
+            double average = data.GetAverageSleep();
+            double min = data.GetMinimumSleep();
+            double max = data.GetMaxmumSleep();
+            double total = data.GetTotalSleep();
 
+            AverageSleep.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
+            MinimumSleep.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
+            MaximumSleep.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
+            TotalSleep.Text = "Total sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
+        }
   
-    }
+        private void Years_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            (ColumnChart.Series[0] as ColumnSeries).Title = "Sleeps";
+            (ColumnChart.Series[0] as ColumnSeries).ItemsSource = data.GetSleep();
 
-    public class FinancialStuff
-    {
-        public string Name { get; set; }
-        public int Amount { get; set; }
-    }
+            (ColumnChart.Series[0] as ColumnSeries).DependentValuePath = "Amount";
+            (ColumnChart.Series[0] as ColumnSeries).IndependentValuePath = "Time";
 
+            var Axis = new LinearAxis()
+            {
+                Orientation = AxisOrientation.X,
+                Location = AxisLocation.Bottom,
+                Interval = 30,
+            };
+
+            (ColumnChart.Series[0] as ColumnSeries).IndependentAxis = Axis;
+        }
+    }
 }

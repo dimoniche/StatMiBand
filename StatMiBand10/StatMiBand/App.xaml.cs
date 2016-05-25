@@ -59,14 +59,11 @@ namespace StatMiBand
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            // long-running startup tasks go here
-            await Task.Delay(1000);
+            XmlData = new SourceData();
+            await XmlData.ReadXmlData();
 
             NavigationService.Navigate(typeof(Views.SleepPage));
             await Task.CompletedTask;
-
-            XmlData = new SourceData();
-            await XmlData.ReadXmlData();
         }
     }
 }

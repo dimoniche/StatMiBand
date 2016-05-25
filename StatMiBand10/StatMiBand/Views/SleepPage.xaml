@@ -62,26 +62,40 @@
 
         </controls:PageHeader>
         <Pivot Margin="0,48,0,0">
-            <PivotItem Header="Summary">
-                <Grid/>
+            <PivotItem Header="Summary" Margin="0,0,0,22" Loaded="OnStart">
+                <Grid Height="424">
+
+                    <Charting:Chart 
+                        x:Name="ColumnChart" 
+                        VerticalAlignment="Top" 
+                        Margin="0,59,0,-50" Height="415" >
+                        <Charting:ColumnSeries 
+                             IndependentValuePath="Name" 
+                             DependentValuePath="Amount" 
+                             IsSelectionEnabled="True"/>
+                    </Charting:Chart>
+                    <ComboBox x:Name="Years" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Years_SelectionChanged"/>
+                </Grid>
             </PivotItem>
-            <PivotItem Header="Details">
-                <Grid/>
+            <PivotItem Header="Details" Loaded="OnStartDetail" Margin="14,0,10,0">
+                <Grid Height="424" VerticalAlignment="Top">
+                    <Border BorderBrush="Gray" BorderThickness="4" Margin="10,10,10,385">
+                        <StackPanel>
+                            <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="All" VerticalAlignment="Top"/>
+                            <Rectangle Fill="DarkBlue" Height="24" Margin="0,0,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush="Gray" BorderThickness="4" Margin="10,44,10,291">
+                        <StackPanel>
+                            <TextBlock x:Name="AverageSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Average sleep " VerticalAlignment="Top"/>
+                            <TextBlock x:Name="MinimumSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum sleep" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="MaximumSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Maximum sleep" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="TotalSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total sleep" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </PivotItem>
         </Pivot>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Top" Width="64.6666641235352" Margin="40,140,-40.667,-140" Click="button_Click"/>
-
-        <Charting:Chart 
-    x:Name="PieChart" 
-    HorizontalAlignment="Left" 
-    VerticalAlignment="Top" 
-    Margin="43,215,-198,-330" Height="260" Width="275" >
-            <Charting:PieSeries Margin="0" 
-         IndependentValuePath="Name" 
-         DependentValuePath="Amount" 
-         IsSelectionEnabled="True"/>
-        </Charting:Chart>
-
     </RelativePanel>
 </Page>
 
