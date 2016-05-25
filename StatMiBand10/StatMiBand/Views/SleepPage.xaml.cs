@@ -26,7 +26,12 @@ namespace StatMiBand.Views
 
         private void OnStart(object sender, RoutedEventArgs e)
         {
-            data = ((App)Application.Current).XmlData;
+            if(data == null)
+            {
+                data = ((App)Application.Current).XmlData;
+            }
+
+            Years.Items.Clear();
 
             foreach (int year in data.GetYearsInData())
             {
@@ -38,6 +43,11 @@ namespace StatMiBand.Views
         
         private void OnStartDetail(object sender, RoutedEventArgs e)
         {
+            if (data == null)
+            {
+                data = ((App)Application.Current).XmlData;
+            }
+
             double average = data.GetAverageSleep();
             double min = data.GetMinimumSleep();
             double max = data.GetMaxmumSleep();
