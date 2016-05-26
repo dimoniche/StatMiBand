@@ -63,86 +63,109 @@
         </controls:PageHeader>
         <Pivot Margin="0,48,0,0">
             <PivotItem Header="Summary" Margin="0,0,0,0" Loaded="OnStart">
-                <Grid Height="870">
-                    <Charting:Chart 
-                        x:Name="ColumnChart" 
-                        VerticalAlignment="Top" 
-                        Height="350" >
-                        <Charting:ColumnSeries 
-                             IndependentValuePath="Name" 
-                             DependentValuePath="Amount" 
-                             IsSelectionEnabled="True"/>
-                    </Charting:Chart>
+                <ScrollViewer 
+                    HorizontalScrollBarVisibility="Auto" 
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <ComboBox x:Name="Years" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" SelectionChanged="Years_SelectionChanged"/>
 
-                    <Charting:Chart 
-                        x:Name="PieChart" Margin="10,350,10,83" Height="350">
-                        <Charting:PieSeries 
+                        <Charting:Chart 
+                            x:Name="ColumnChart" 
+                            VerticalAlignment="Top" 
+                            Height="350" >
+                            <Charting:ColumnSeries 
+                                 IndependentValuePath="Name" 
+                                 DependentValuePath="Amount" 
+                                 IsSelectionEnabled="True"/>
+                        </Charting:Chart>
+
+                        <Charting:Chart 
+                            x:Name="PieChart" Height="350">
+                            <Charting:Chart.Palette>
+                                <Charting:ResourceDictionaryCollection>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Blue" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Red" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                </Charting:ResourceDictionaryCollection>
+                            </Charting:Chart.Palette>
+
+                            <Charting:PieSeries 
                              IndependentValuePath="DataName" 
                              DependentValuePath="DataValue" 
                              IsSelectionEnabled="True"/>
-
-                        <Charting:Chart.Palette>
-                            <Charting:ResourceDictionaryCollection>
-                                <ResourceDictionary>
-                                    <Style x:Key="DataPointStyle" TargetType="Control">
-                                        <Setter Property="Background" Value="Blue" />
-                                    </Style>
-                                </ResourceDictionary>
-                                <ResourceDictionary>
-                                    <Style x:Key="DataPointStyle" TargetType="Control">
-                                        <Setter Property="Background" Value="Red" />
-                                    </Style>
-                                </ResourceDictionary>
-                            </Charting:ResourceDictionaryCollection>
-                        </Charting:Chart.Palette>
-                    </Charting:Chart>
-
-                    <ComboBox x:Name="Years" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Years_SelectionChanged"/>
-                </Grid>
+                        </Charting:Chart>
+                    </StackPanel>
+                </ScrollViewer>
             </PivotItem>
             <PivotItem Header="Details" Loaded="OnStartDetail">
-                <Grid>
-                    <Border BorderBrush="Gray" BorderThickness="2" Margin="0,0,0,500">
-                        <StackPanel>
-                            <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top"/>
-                        </StackPanel>
-                    </Border>
-                    <Border BorderBrush="Gray" BorderThickness="2" Height="200" Margin="0,29,0,295">
-                        <StackPanel>
-                            <TextBlock x:Name="AverageSleep" Text="Average sleep "/>
-                            <TextBlock x:Name="MinimumSleep" Text="Minimum sleep"/>
-                            <TextBlock x:Name="MaximumSleep" Text="Maximum sleep"/>
-                            <TextBlock x:Name="TotalSleep" Text="Total sleep"/>
-                            <Charting:Chart x:Name="TotalPieChart" Height="93" Margin="10,0,176,0">
-                                <Charting:PieSeries 
+                <ScrollViewer 
+                    HorizontalScrollBarVisibility="Auto" 
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Border BorderBrush="Gray" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Gray" BorderThickness="2" Height="240">
+                            <StackPanel Height="263">
+                                <TextBlock x:Name="AverageSleep" Text="Average sleep "/>
+                                <TextBlock x:Name="MinimumSleep" Text="Minimum sleep"/>
+                                <TextBlock x:Name="MaximumSleep" Text="Maximum sleep"/>
+                                <TextBlock x:Name="TotalSleep" Text="Total sleep"/>
+                                <Charting:Chart x:Name="TotalPieChart" Height="167" Width="307">
+                                    <Charting:PieSeries 
                             		IndependentValuePath="DataName" 
                             		DependentValuePath="DataValue" 
-                            		IsSelectionEnabled="True"/>
-                            </Charting:Chart>
-                        </StackPanel>
-                    </Border>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="35" Margin="10,268,0,0" VerticalAlignment="Top" Width="316">
-                        <TextBlock x:Name="Week" TextWrapping="Wrap" Text="Week"/>
-                    </Border>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="85" Margin="10,312,0,0" VerticalAlignment="Top" Width="316">
-                        <StackPanel>
-                            <TextBlock x:Name="AverageSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Average sleep " VerticalAlignment="Top"/>
-                            <TextBlock x:Name="MinimumSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum sleep" VerticalAlignment="Top"/>
-                            <TextBlock x:Name="MaximumSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Maximum sleep" VerticalAlignment="Top"/>
-                        </StackPanel>
-                    </Border>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" Margin="10,402,0,0" VerticalAlignment="Top" Width="316">
-                        <TextBlock x:Name="Month" TextWrapping="Wrap" Text="Month" Margin="0,4,-1,-4"/>
-                    </Border>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,447,0,0" VerticalAlignment="Top" Width="316">
-                        <StackPanel>
-                            <TextBlock x:Name="AverageSleepMonth" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Average sleep " VerticalAlignment="Top"/>
-                            <TextBlock x:Name="MinimumSleepMonth" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum sleep" VerticalAlignment="Top"/>
-                            <TextBlock x:Name="MaximumSleepMonth" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Maximum sleep" VerticalAlignment="Top"/>
-                        </StackPanel>
-                    </Border>
-
-                </Grid>
+                            		IsSelectionEnabled="True" Margin="10,-37,0,-21" HorizontalAlignment="Left" Width="178"/>
+                                </Charting:Chart>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Week" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Week"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="AverageSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Average sleep"/>
+                                <TextBlock x:Name="MinimumSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum sleep"/>
+                                <TextBlock x:Name="MaximumSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Maximum sleep"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Month" TextWrapping="Wrap" Text="Month"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="AverageSleepMonth" Text="Average sleep"/>
+                                <TextBlock x:Name="MinimumSleepMonth" Text="Minimum sleep"/>
+                                <TextBlock x:Name="MaximumSleepMonth" Text="Maximum sleep"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Year" TextWrapping="Wrap" Text="Year"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="AverageSleepYear" Text="Average sleep"/>
+                                <TextBlock x:Name="MinimumSleepYear" Text="Minimum sleep"/>
+                                <TextBlock x:Name="MaximumSleepYear" Text="Maximum sleep"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
             </PivotItem>
         </Pivot>
     </RelativePanel>
