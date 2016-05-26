@@ -57,12 +57,20 @@ namespace StatMiBand.Views
             MinimumSleep.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
             MaximumSleep.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
             TotalSleep.Text = "Total sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
+
+            //
+            List<ChartData> TotalChartInfo = new List<ChartData>();
+
+            TotalChartInfo.Add(new ChartData() { DataName = "Sleeping", DataValue = (int)data.GetTotalSleep() });
+            TotalChartInfo.Add(new ChartData() { DataName = "Waking", DataValue = data.GetTotalDays() * 24 - (int)data.GetTotalSleep() });
+
+            (TotalPieChart.Series[0] as PieSeries).ItemsSource = TotalChartInfo;
         }
   
         private void Years_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             (ColumnChart.Series[0] as ColumnSeries).Title = "Sleeps";
-            (ColumnChart.Series[0] as ColumnSeries).ItemsSource = data.GetSleep();
+            (ColumnChart.Series[0] as ColumnSeries).ItemsSource = data.GetSleep((int)Years.SelectedItem);
 
             (ColumnChart.Series[0] as ColumnSeries).DependentValuePath = "Amount";
             (ColumnChart.Series[0] as ColumnSeries).IndependentValuePath = "Time";
@@ -75,6 +83,15 @@ namespace StatMiBand.Views
             };
 
             (ColumnChart.Series[0] as ColumnSeries).IndependentAxis = Axis;
+
+            //
+            List<ChartData> ChartInfo = new List<ChartData>();
+
+            ChartInfo.Add(new ChartData() { DataName = "Sleeping", DataValue = (int)data.GetTotalSleep((int)Years.SelectedItem) });
+            ChartInfo.Add(new ChartData() { DataName = "Waking", DataValue = data.GetTotalDays()*24 - (int)data.GetTotalSleep((int)Years.SelectedItem) });
+
+            (PieChart.Series[0] as PieSeries).ItemsSource = ChartInfo;
+
         }
     }
 }

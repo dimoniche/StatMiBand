@@ -6,7 +6,8 @@
     "Newtonsoft.Json": "8.0.3",
     "Template10": "1.1.8",
     "WinRTXamlToolkit.Controls.DataVisualization": "2.0.0",
-    "WinRTXamlToolkit.Controls.DataVisualization.UWP": "2.0.0"
+    "WinRTXamlToolkit.Controls.DataVisualization.UWP": "2.0.0",
+    "WinRTXamlToolkit.UWP": "2.0.0"
   },
   "frameworks": {
     "uap10.0": {}

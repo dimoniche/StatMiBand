@@ -63,33 +63,63 @@
         </controls:PageHeader>
         <Pivot Margin="0,48,0,0">
             <PivotItem Header="Summary" Margin="0,0,0,22" Loaded="OnStart">
-                <Grid Height="534">
-
+                <Grid Height="870">
                     <Charting:Chart 
                         x:Name="ColumnChart" 
                         VerticalAlignment="Top" 
-                        Margin="0,59,0,-50" Height="415" >
+                        Height="350" >
                         <Charting:ColumnSeries 
                              IndependentValuePath="Name" 
                              DependentValuePath="Amount" 
                              IsSelectionEnabled="True"/>
                     </Charting:Chart>
+
+                    <Charting:Chart 
+                        x:Name="PieChart" Margin="10,350,10,83" Height="350">
+                        <Charting:PieSeries 
+                             IndependentValuePath="DataName" 
+                             DependentValuePath="DataValue" 
+                             IsSelectionEnabled="True"/>
+
+                        <Charting:Chart.Palette>
+                            <Charting:ResourceDictionaryCollection>
+                                <ResourceDictionary>
+                                    <Style x:Key="DataPointStyle" TargetType="Control">
+                                        <Setter Property="Background" Value="Blue" />
+                                    </Style>
+                                </ResourceDictionary>
+                                <ResourceDictionary>
+                                    <Style x:Key="DataPointStyle" TargetType="Control">
+                                        <Setter Property="Background" Value="Red" />
+                                    </Style>
+                                </ResourceDictionary>
+                            </Charting:ResourceDictionaryCollection>
+                        </Charting:Chart.Palette>
+                    </Charting:Chart>
+
                     <ComboBox x:Name="Years" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Years_SelectionChanged"/>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="Details" Loaded="OnStartDetail" Margin="14,0,10,0">
-                <Grid Height="529" VerticalAlignment="Top">
-                    <Border BorderBrush="Gray" BorderThickness="2" Margin="10,10,10,490">
+            <PivotItem Header="Details" Loaded="OnStartDetail" Margin="0,0,0,0">
+                <Grid Height="1200">
+                    <Border BorderBrush="Gray" BorderThickness="2" Margin="10,10,10,1156">
                         <StackPanel>
-                            <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="All" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top"/>
                         </StackPanel>
                     </Border>
-                    <Border BorderBrush="Gray" BorderThickness="2" Margin="10,44,10,310">
+                    <Border BorderBrush="Gray" BorderThickness="2" Margin="10,49,10,981">
                         <StackPanel>
                             <TextBlock x:Name="AverageSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Average sleep " VerticalAlignment="Top"/>
                             <TextBlock x:Name="MinimumSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum sleep" VerticalAlignment="Top"/>
                             <TextBlock x:Name="MaximumSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Maximum sleep" VerticalAlignment="Top"/>
                             <TextBlock x:Name="TotalSleep" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total sleep" VerticalAlignment="Top"/>
+                            <Charting:Chart x:Name="TotalPieChart" Width="70" Height="70" VerticalAlignment="Top" >
+                                <Charting:PieSeries 
+                            		IndependentValuePath="DataName" 
+                            		DependentValuePath="DataValue" 
+                            		IsSelectionEnabled="True"/>
+                            </Charting:Chart>
+
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="35" Margin="10,268,0,0" VerticalAlignment="Top" Width="316">

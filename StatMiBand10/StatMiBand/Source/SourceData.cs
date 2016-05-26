@@ -144,6 +144,16 @@ namespace StatMiBand.Source
             return GetSleep().Sum(a => a.Amount);
         }
 
+        public double GetTotalSleep(int Year)
+        {
+            return GetSleep(Year).Sum(a => a.Amount);
+        }
+
+        public int GetTotalDays()
+        {
+            return data.Days.Count;
+        }
+
         public List<int> GetYearsInData()
         {
             List<int> years = new List<int>();
@@ -165,5 +175,11 @@ namespace StatMiBand.Source
     {
         public int Time { get; set; }
         public double Amount { get; set; }
+    }
+
+    public class ChartData
+    {
+        public string DataName { get; set; }
+        public int DataValue { get; set; }
     }
 }
