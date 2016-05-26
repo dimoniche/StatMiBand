@@ -65,8 +65,33 @@ namespace StatMiBand.Views
             TotalChartInfo.Add(new ChartData() { DataName = "Waking", DataValue = data.GetTotalDays() * 24 - (int)data.GetTotalSleep() });
 
             (TotalPieChart.Series[0] as PieSeries).ItemsSource = TotalChartInfo;
+
+            average = data.GetAverageSleep();
+            min = data.GetMinimumSleep();
+            max = data.GetMaxmumSleep();
+
+            AverageSleepWeek.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
+            MinimumSleepWeek.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
+            MaximumSleepWeek.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
+
+            average = data.GetAverageSleep();
+            min = data.GetMinimumSleep();
+            max = data.GetMaxmumSleep();
+
+            AverageSleepMonth.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
+            MinimumSleepMonth.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
+            MaximumSleepMonth.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
+
+            average = data.GetAverageSleep();
+            min = data.GetMinimumSleep();
+            max = data.GetMaxmumSleep();
+
+            AverageSleepYear.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
+            MinimumSleepYear.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
+            MaximumSleepYear.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
+
         }
-  
+
         private void Years_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             (ColumnChart.Series[0] as ColumnSeries).Title = "Sleeps";

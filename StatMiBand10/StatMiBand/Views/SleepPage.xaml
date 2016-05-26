@@ -114,17 +114,17 @@
                                 <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
-                        <Border BorderBrush="Gray" BorderThickness="2" Height="240">
-                            <StackPanel Height="263">
+                        <Border BorderBrush="Gray" BorderThickness="2" Height="300">
+                            <StackPanel Height="300">
                                 <TextBlock x:Name="AverageSleep" Text="Average sleep "/>
                                 <TextBlock x:Name="MinimumSleep" Text="Minimum sleep"/>
                                 <TextBlock x:Name="MaximumSleep" Text="Maximum sleep"/>
                                 <TextBlock x:Name="TotalSleep" Text="Total sleep"/>
-                                <Charting:Chart x:Name="TotalPieChart" Height="167" Width="307">
+                                <Charting:Chart x:Name="TotalPieChart" Height="210" Width="312">
                                     <Charting:PieSeries 
                             		IndependentValuePath="DataName" 
                             		DependentValuePath="DataValue" 
-                            		IsSelectionEnabled="True" Margin="10,-37,0,-21" HorizontalAlignment="Left" Width="178"/>
+                            		IsSelectionEnabled="True" HorizontalAlignment="Left" Width="168" Height="200" Margin="0,-37,0,-23" VerticalAlignment="Bottom"/>
                                 </Charting:Chart>
                             </StackPanel>
                         </Border>
@@ -135,9 +135,9 @@
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
-                                <TextBlock x:Name="AverageSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Average sleep"/>
-                                <TextBlock x:Name="MinimumSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum sleep"/>
-                                <TextBlock x:Name="MaximumSleepWeek" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Maximum sleep"/>
+                                <TextBlock x:Name="AverageSleepWeek" Text="Average sleep"/>
+                                <TextBlock x:Name="MinimumSleepWeek" Text="Minimum sleep"/>
+                                <TextBlock x:Name="MaximumSleepWeek" Text="Maximum sleep"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
