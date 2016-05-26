@@ -131,6 +131,7 @@
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
                                 <TextBlock x:Name="Week" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Week"/>
+                                <CalendarDatePicker x:Name="CalendarWeek" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="CalendarWeek_DateChanged"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
@@ -143,6 +144,7 @@
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
                                 <TextBlock x:Name="Month" TextWrapping="Wrap" Text="Month"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <CalendarDatePicker x:Name="CalendarMonth" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
@@ -155,6 +157,7 @@
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
                                 <TextBlock x:Name="Year" TextWrapping="Wrap" Text="Year"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <CalendarDatePicker x:Name="CalendarYear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">

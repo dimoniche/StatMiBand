@@ -113,10 +113,15 @@ namespace StatMiBand.Views
             List<ChartData> ChartInfo = new List<ChartData>();
 
             ChartInfo.Add(new ChartData() { DataName = "Sleeping", DataValue = (int)data.GetTotalSleep((int)Years.SelectedItem) });
-            ChartInfo.Add(new ChartData() { DataName = "Waking", DataValue = data.GetTotalDays()*24 - (int)data.GetTotalSleep((int)Years.SelectedItem) });
+            ChartInfo.Add(new ChartData() { DataName = "Waking up", DataValue = data.GetTotalDays()*24 - (int)data.GetTotalSleep((int)Years.SelectedItem) });
 
             (PieChart.Series[0] as PieSeries).ItemsSource = ChartInfo;
 
+        }
+
+        private void CalendarWeek_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            //CalendarWeek.Date.Value.w
         }
     }
 }
