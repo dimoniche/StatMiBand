@@ -7,6 +7,7 @@
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:StatMiBand.Views"
+      xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:StatMiBand.ViewModels" mc:Ignorable="d">
 
@@ -50,7 +51,7 @@
 
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="Working" VerticalAlignment="Top" Height="48">
+                             RelativePanel.AlignTopWithPanel="True" Text="Steps" VerticalAlignment="Top" Height="48">
 
             <!--  secondary commands  -->
             <controls:PageHeader.SecondaryCommands>
@@ -60,13 +61,120 @@
             </controls:PageHeader.SecondaryCommands>
 
         </controls:PageHeader>
-
         <Pivot Margin="0,48,0,0">
-            <PivotItem Header="Summary">
-                <Grid/>
+            <PivotItem Header="Summary" Margin="0,0,0,0" Loaded="OnStart">
+                <ScrollViewer 
+                    HorizontalScrollBarVisibility="Auto" 
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+
+                        <ComboBox x:Name="Years" VerticalAlignment="Top" Width="160" SelectionChanged="Years_SelectionChanged"/>
+
+                        <Charting:Chart 
+                    		x:Name="ColumnChart" 
+                    		VerticalAlignment="Top" 
+                    		Height="350" >
+                            <Charting:ColumnSeries 
+                    			IndependentValuePath="Name" 
+                    			DependentValuePath="Amount" 
+                    			IsSelectionEnabled="True"/>
+                        </Charting:Chart>
+
+                        <TextBlock x:Name="Average" Text="Average step " Width="285"/>
+                        <TextBlock x:Name="Minimum" Text="Minimum step" Width="285"/>
+                        <TextBlock x:Name="Maximum" Text="Maximum step" Width="285"/>
+                        <TextBlock x:Name="Total" Text="Total step" Width="285"/>
+
+                        <Charting:Chart 
+                    		x:Name="PieChart" Height="350">
+                            <Charting:Chart.Palette>
+                                <Charting:ResourceDictionaryCollection>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Blue" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Red" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                </Charting:ResourceDictionaryCollection>
+                            </Charting:Chart.Palette>
+
+                            <Charting:PieSeries 
+                    			IndependentValuePath="DataName" 
+                    			DependentValuePath="DataValue" 
+                    			IsSelectionEnabled="True"/>
+                        </Charting:Chart>
+                    </StackPanel>
+                </ScrollViewer>
             </PivotItem>
-            <PivotItem Header="Details">
-                <Grid/>
+            <PivotItem Header="Details" Loaded="OnStartDetail">
+                <ScrollViewer 
+                    HorizontalScrollBarVisibility="Auto" 
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Border BorderBrush="Gray" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Gray" BorderThickness="2" Height="300">
+                            <StackPanel Height="300">
+                                <TextBlock x:Name="AverageStep" Text="Average step "/>
+                                <TextBlock x:Name="MinimumStep" Text="Minimum step"/>
+                                <TextBlock x:Name="MaximumStep" Text="Maximum step"/>
+                                <TextBlock x:Name="TotalStep" Text="Total step"/>
+                                <Charting:Chart x:Name="TotalPieChart" Height="210" Width="312">
+                                    <Charting:PieSeries 
+                            		IndependentValuePath="DataName" 
+                            		DependentValuePath="DataValue" 
+                            		IsSelectionEnabled="True" HorizontalAlignment="Left" Width="168" Height="200" Margin="0,-37,0,-23" VerticalAlignment="Bottom"/>
+                                </Charting:Chart>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Day" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Day"/>
+                                <CalendarDatePicker x:Name="CalendarDay" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="CalendarDateChanged"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="AverageStepDay" Text="Sleep"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Month" TextWrapping="Wrap" Text="Month"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <CalendarDatePicker x:Name="CalendarMonth" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="MonthChanged" DisplayMode="Month"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="TotalStepMonth" Text="Total sleep"/>
+                                <TextBlock x:Name="AverageStepMonth" Text="Average step"/>
+                                <TextBlock x:Name="MinimumStepMonth" Text="Minimum step"/>
+                                <TextBlock x:Name="MaximumStepMonth" Text="Maximum step"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="Year" TextWrapping="Wrap" Text="Year"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <CalendarDatePicker x:Name="CalendarYear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="YearChanged" DisplayMode="Year"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock x:Name="TotalStepYear" Text="Total sleep"/>
+                                <TextBlock x:Name="AverageStepYear" Text="Average step"/>
+                                <TextBlock x:Name="MinimumStepYear" Text="Minimum step"/>
+                                <TextBlock x:Name="MaximumStepYear" Text="Maximum step"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
             </PivotItem>
         </Pivot>
 

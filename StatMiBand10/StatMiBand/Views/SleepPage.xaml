@@ -67,20 +67,26 @@
                     HorizontalScrollBarVisibility="Auto" 
                     VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <ComboBox x:Name="Years" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" SelectionChanged="Years_SelectionChanged"/>
+
+                        <ComboBox x:Name="Years" VerticalAlignment="Top" Width="160" SelectionChanged="Years_SelectionChanged"/>
 
                         <Charting:Chart 
-                            x:Name="ColumnChart" 
-                            VerticalAlignment="Top" 
-                            Height="350" >
+                    		x:Name="ColumnChart" 
+                    		VerticalAlignment="Top" 
+                    		Height="350" >
                             <Charting:ColumnSeries 
-                                 IndependentValuePath="Name" 
-                                 DependentValuePath="Amount" 
-                                 IsSelectionEnabled="True"/>
+                    			IndependentValuePath="Name" 
+                    			DependentValuePath="Amount" 
+                    			IsSelectionEnabled="True"/>
                         </Charting:Chart>
 
+                        <TextBlock x:Name="Average" Text="Average sleep " Width="285"/>
+                        <TextBlock x:Name="Minimum" Text="Minimum sleep" Width="285"/>
+                        <TextBlock x:Name="Maximum" Text="Maximum sleep" Width="285"/>
+                        <TextBlock x:Name="Total" Text="Total sleep" Width="285"/>
+
                         <Charting:Chart 
-                            x:Name="PieChart" Height="350">
+                    		x:Name="PieChart" Height="350">
                             <Charting:Chart.Palette>
                                 <Charting:ResourceDictionaryCollection>
                                     <ResourceDictionary>
@@ -97,9 +103,9 @@
                             </Charting:Chart.Palette>
 
                             <Charting:PieSeries 
-                             IndependentValuePath="DataName" 
-                             DependentValuePath="DataValue" 
-                             IsSelectionEnabled="True"/>
+                    			IndependentValuePath="DataName" 
+                    			DependentValuePath="DataValue" 
+                    			IsSelectionEnabled="True"/>
                         </Charting:Chart>
                     </StackPanel>
                 </ScrollViewer>
@@ -130,25 +136,24 @@
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
-                                <TextBlock x:Name="Week" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Week"/>
-                                <CalendarDatePicker x:Name="CalendarWeek" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="CalendarWeek_DateChanged"/>
+                                <TextBlock x:Name="Day" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Day"/>
+                                <CalendarDatePicker x:Name="CalendarDay" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="CalendarDateChanged"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
-                                <TextBlock x:Name="AverageSleepWeek" Text="Average sleep"/>
-                                <TextBlock x:Name="MinimumSleepWeek" Text="Minimum sleep"/>
-                                <TextBlock x:Name="MaximumSleepWeek" Text="Maximum sleep"/>
+                                <TextBlock x:Name="AverageSleepDay" Text="Sleep"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
                                 <TextBlock x:Name="Month" TextWrapping="Wrap" Text="Month"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                <CalendarDatePicker x:Name="CalendarMonth" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                <CalendarDatePicker x:Name="CalendarMonth" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="MonthChanged" DisplayMode="Month"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
+                                <TextBlock x:Name="TotalSleepMonth" Text="Total sleep"/>
                                 <TextBlock x:Name="AverageSleepMonth" Text="Average sleep"/>
                                 <TextBlock x:Name="MinimumSleepMonth" Text="Minimum sleep"/>
                                 <TextBlock x:Name="MaximumSleepMonth" Text="Maximum sleep"/>
@@ -157,11 +162,12 @@
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
                                 <TextBlock x:Name="Year" TextWrapping="Wrap" Text="Year"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                <CalendarDatePicker x:Name="CalendarYear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                <CalendarDatePicker x:Name="CalendarYear" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DateChanged="YearChanged" DisplayMode="Year"/>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
                             <StackPanel>
+                                <TextBlock x:Name="TotalSleepYear" Text="Total sleep"/>
                                 <TextBlock x:Name="AverageSleepYear" Text="Average sleep"/>
                                 <TextBlock x:Name="MinimumSleepYear" Text="Minimum sleep"/>
                                 <TextBlock x:Name="MaximumSleepYear" Text="Maximum sleep"/>

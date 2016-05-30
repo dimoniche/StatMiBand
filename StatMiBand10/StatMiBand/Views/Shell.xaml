@@ -26,7 +26,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <!--  run button  -->
+            <!--  run button  
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:RunPage" 
                                           AutomationProperties.Name="Jerry"
                                           >
@@ -36,7 +36,7 @@
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
                                Text="Runing" />
                 </StackPanel>
-            </Controls:HamburgerButtonInfo>
+            </Controls:HamburgerButtonInfo> -->
 
             <!--  step button  -->
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:StepPage" 
@@ -46,7 +46,7 @@
                     <SymbolIcon Width="48" Height="48"
                                 Symbol="Home" />
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
-                               Text="Working" />
+                               Text="Walking" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 

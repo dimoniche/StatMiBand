@@ -31,16 +31,29 @@ namespace StatMiBand.Views
                 data = ((App)Application.Current).XmlData;
             }
 
-            Years.Items.Clear();
-
-            foreach (int year in data.GetYearsInData())
+            if (Years.SelectedItem == null)
             {
-                Years.Items.Add(year);
+                Years.Items.Clear();
+
+                foreach (int year in data.GetYearsInData())
+                {
+                    Years.Items.Add(year);
+                }
+
+                Years.SelectedIndex = 0;
             }
 
-            Years.SelectedIndex = 0;
+            double average = data.GetAverageSleep();
+            double min = data.GetMinimumSleep();
+            double max = data.GetMaxmumSleep();
+            double total = data.GetTotalSleep();
+
+            Average.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
+            Minimum.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
+            Maximum.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
+            Total.Text = "Total sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
         }
-        
+
         private void OnStartDetail(object sender, RoutedEventArgs e)
         {
             if (data == null)
@@ -70,30 +83,47 @@ namespace StatMiBand.Views
             min = data.GetMinimumSleep();
             max = data.GetMaxmumSleep();
 
-            AverageSleepWeek.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
-            MinimumSleepWeek.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
-            MaximumSleepWeek.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
+            AverageSleepDay.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
 
-            average = data.GetAverageSleep();
-            min = data.GetMinimumSleep();
-            max = data.GetMaxmumSleep();
+            total = data.GetTotalSleep(DateTime.Now.Year, DateTime.Now.Month);
+            average = data.GetAverageSleep(DateTime.Now.Year, DateTime.Now.Month);
+            min = data.GetMinimumSleep(DateTime.Now.Year, DateTime.Now.Month);
+            max = data.GetMaxmumSleep(DateTime.Now.Year, DateTime.Now.Month);
 
+            TotalSleepMonth.Text = "Total sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
             AverageSleepMonth.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
             MinimumSleepMonth.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
             MaximumSleepMonth.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
 
-            average = data.GetAverageSleep();
-            min = data.GetMinimumSleep();
-            max = data.GetMaxmumSleep();
+            total = data.GetTotalSleep(DateTime.Now.Year);
+            average = data.GetAverageSleep(DateTime.Now.Year);
+            min = data.GetMinimumSleep(DateTime.Now.Year);
+            max = data.GetMaxmumSleep(DateTime.Now.Year);
 
+            TotalSleepYear.Text = "Total sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
             AverageSleepYear.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
             MinimumSleepYear.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
             MaximumSleepYear.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
 
+            CalendarDay.Date = DateTime.Now;
+            CalendarMonth.Date = DateTime.Now;
+            CalendarYear.Date = DateTime.Now;
         }
 
         private void Years_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (Years.SelectedItem == null)
+            {
+                Years.Items.Clear();
+
+                foreach (int year in data.GetYearsInData())
+                {
+                    Years.Items.Add(year);
+                }
+
+                Years.SelectedIndex = 0;
+            }
+
             (ColumnChart.Series[0] as ColumnSeries).Title = "Sleeps";
             (ColumnChart.Series[0] as ColumnSeries).ItemsSource = data.GetSleep((int)Years.SelectedItem);
 
@@ -119,9 +149,37 @@ namespace StatMiBand.Views
 
         }
 
-        private void CalendarWeek_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        private void CalendarDateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
         {
-            //CalendarWeek.Date.Value.w
+            double total = data.GetTotalSleep(CalendarDay.Date.Value.Year, CalendarDay.Date.Value.Month, CalendarDay.Date.Value.Day);
+
+            AverageSleepDay.Text = "Average sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
+        }
+
+        private void MonthChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            double total = data.GetTotalSleep(CalendarMonth.Date.Value.Year, CalendarMonth.Date.Value.Month);
+            double average = data.GetAverageSleep(CalendarMonth.Date.Value.Year, CalendarMonth.Date.Value.Month);
+            double min = data.GetMinimumSleep(CalendarMonth.Date.Value.Year, CalendarMonth.Date.Value.Month);
+            double max = data.GetMaxmumSleep(CalendarMonth.Date.Value.Year, CalendarMonth.Date.Value.Month);
+
+            TotalSleepMonth.Text = "Total sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
+            AverageSleepMonth.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
+            MinimumSleepMonth.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
+            MaximumSleepMonth.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
+        }
+
+        private void YearChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            double total = data.GetTotalSleep(CalendarYear.Date.Value.Year);
+            double average = data.GetAverageSleep(CalendarYear.Date.Value.Year);
+            double min = data.GetMinimumSleep(CalendarYear.Date.Value.Year);
+            double max = data.GetMaxmumSleep(CalendarYear.Date.Value.Year);
+
+            TotalSleepYear.Text = "Total sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
+            AverageSleepYear.Text = "Average sleep " + (int)(average) + " hours " + (int)(average * 60) % 60 + " minute.";
+            MinimumSleepYear.Text = "Minimum sleep " + (int)(min) + " hours " + (int)(min * 60) % 60 + " minute.";
+            MaximumSleepYear.Text = "Maximum sleep " + (int)(max) + " hours " + (int)(max * 60) % 60 + " minute.";
         }
     }
 }
