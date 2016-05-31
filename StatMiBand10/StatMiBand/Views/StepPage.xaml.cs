@@ -81,6 +81,24 @@ namespace StatMiBand.Views
 
             (ColumnChart.Series[0] as ColumnSeries).IndependentAxis = Axis;
 
+            (ColumnChart.Series[0] as ColumnSeries).IndependentAxis = Axis;
+
+            ColumnChart.Series.Add(new LineSeries());
+
+            (ColumnChart.Series[1] as LineSeries).Title = "Average Steps";
+            (ColumnChart.Series[1] as LineSeries).ItemsSource = data.GetAverageSteps((int)Years.SelectedItem);
+
+            (ColumnChart.Series[1] as LineSeries).DependentValuePath = "Amount";
+            (ColumnChart.Series[1] as LineSeries).IndependentValuePath = "Time";
+
+            ColumnChart.Series.Add(new LineSeries());
+
+            (ColumnChart.Series[2] as LineSeries).Title = "Goal";
+            (ColumnChart.Series[2] as LineSeries).ItemsSource = data.GetGoalSteps((int)Years.SelectedItem);
+
+            (ColumnChart.Series[2] as LineSeries).DependentValuePath = "Amount";
+            (ColumnChart.Series[2] as LineSeries).IndependentValuePath = "Time";
+
             //
             //List<ChartData> ChartInfo = new List<ChartData>();
 
@@ -120,7 +138,7 @@ namespace StatMiBand.Views
             min = data.GetMinimumStep();
             max = data.GetMaxmumStep();
 
-            AverageStepDay.Text = "Average Step " + (int)(average) + " km ";
+            AverageStepDay.Text = "Step " + (int)(average) + " km ";
 
             total = data.GetTotalStep(DateTime.Now.Year, DateTime.Now.Month);
             average = data.GetAverageStep(DateTime.Now.Year, DateTime.Now.Month);
@@ -151,7 +169,7 @@ namespace StatMiBand.Views
         {
             double total = data.GetTotalStep(CalendarDay.Date.Value.Year, CalendarDay.Date.Value.Month, CalendarDay.Date.Value.Day);
 
-            AverageStepDay.Text = "Average Step " + (int)(total) + " km ";
+            AverageStepDay.Text = "Step " + (int)(total) + " km ";
         }
 
         private void MonthChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)

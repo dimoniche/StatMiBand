@@ -40,7 +40,7 @@ namespace StatMiBand.Views
                     Years.Items.Add(year);
                 }
 
-                Years.SelectedIndex = 0;
+                if(Years.Items.Count > 0) Years.SelectedIndex = 0;
             }
 
             double average = data.GetAverageSleep();
@@ -139,11 +139,27 @@ namespace StatMiBand.Views
 
             (ColumnChart.Series[0] as ColumnSeries).IndependentAxis = Axis;
 
+            ColumnChart.Series.Add(new LineSeries());
+
+            (ColumnChart.Series[1] as LineSeries).Title = "Average Sleeps";
+            (ColumnChart.Series[1] as LineSeries).ItemsSource = data.GetAverageSleeps((int)Years.SelectedItem);
+
+            (ColumnChart.Series[1] as LineSeries).DependentValuePath = "Amount";
+            (ColumnChart.Series[1] as LineSeries).IndependentValuePath = "Time";
+
+            ColumnChart.Series.Add(new LineSeries());
+
+            (ColumnChart.Series[2] as LineSeries).Title = "Goal";
+            (ColumnChart.Series[2] as LineSeries).ItemsSource = data.GetGoalSleeps((int)Years.SelectedItem);
+
+            (ColumnChart.Series[2] as LineSeries).DependentValuePath = "Amount";
+            (ColumnChart.Series[2] as LineSeries).IndependentValuePath = "Time";
+
             //
             List<ChartData> ChartInfo = new List<ChartData>();
 
             ChartInfo.Add(new ChartData() { DataName = "Sleeping", DataValue = (int)data.GetTotalSleep((int)Years.SelectedItem) });
-            ChartInfo.Add(new ChartData() { DataName = "Waking up", DataValue = data.GetTotalDays()*24 - (int)data.GetTotalSleep((int)Years.SelectedItem) });
+            ChartInfo.Add(new ChartData() { DataName = "Waking up", DataValue = data.GetTotalDays() * 24 - (int)data.GetTotalSleep((int)Years.SelectedItem)});
 
             (PieChart.Series[0] as PieSeries).ItemsSource = ChartInfo;
 
@@ -153,7 +169,7 @@ namespace StatMiBand.Views
         {
             double total = data.GetTotalSleep(CalendarDay.Date.Value.Year, CalendarDay.Date.Value.Month, CalendarDay.Date.Value.Day);
 
-            AverageSleepDay.Text = "Average sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
+            AverageSleepDay.Text = "Sleep " + (int)(total) + " hours " + (int)(total * 60) % 60 + " minute.";
         }
 
         private void MonthChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)

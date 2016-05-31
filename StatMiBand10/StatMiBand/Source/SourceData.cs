@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace StatMiBand.Source
 {
@@ -73,6 +74,112 @@ namespace StatMiBand.Source
         public void ParseJsonData()
         {
             data = JsonData.FromJson(JObject.Parse(stringData));
+        }
+
+        public List<GraphData> GetAverageSleeps(int year)
+        {
+            List<GraphData> val = new List<GraphData>();
+            double Val = 0.0;
+            double averageVal = 0.0;
+            int count = 1;
+
+            foreach (Days day in data.Days)
+            {
+                if (day.Date.Year == year)
+                {
+                    averageVal += day.SleepMinutes;
+                    Val = averageVal / count;
+                    count++;
+                    val.Add(new GraphData() { Time = day.Date.DayOfYear, Amount = (Val * 1000 / 60) / 1000.0 });
+                }
+            }
+
+            return val;
+        }
+
+        public List<GraphData> GetAverageSteps(int year)
+        {
+            List<GraphData> val = new List<GraphData>();
+            double Val = 0.0;
+            double averageVal = 0.0;
+            int count = 1;
+
+            foreach (Days day in data.Days)
+            {
+                if (day.Date.Year == year)
+                {
+                    averageVal += day.Steps;
+                    Val = averageVal / count;
+                    count++;
+                    val.Add(new GraphData() { Time = day.Date.DayOfYear, Amount = (Val * 1000) / 1000.0 });
+                }
+            }
+
+            return val;
+        }
+
+        public double GetGoalSleep(int year)
+        {
+            int val = 0;
+            int count = 0;
+
+            foreach (Days day in data.Days)
+            {
+                if (day.Date.Year == year)
+                {
+                    val += day.SleepGoalMinutes;
+                    count++;
+                }
+            }
+
+            return (val * 1000 / count / 60)/1000.0;
+        }
+
+        public double GetGoalStep(int year)
+        {
+            int val = 0;
+            int count = 0;
+
+            foreach (Days day in data.Days)
+            {
+                if (day.Date.Year == year)
+                {
+                    val += day.StepsGoal;
+                    count++;
+                }
+            }
+
+            return (val * 1000 / count) / 1000.0;
+        }
+
+        internal IEnumerable GetGoalSleeps(int year)
+        {
+            List<GraphData> val = new List<GraphData>();
+
+            foreach (Days day in data.Days)
+            {
+                if (day.Date.Year == year)
+                {
+                    val.Add(new GraphData() { Time = day.Date.DayOfYear, Amount = (day.SleepGoalMinutes * 1000 / 60) / 1000.0 });
+                }
+            }
+
+            return val;
+        }
+
+        internal IEnumerable GetGoalSteps(int year)
+        {
+            List<GraphData> val = new List<GraphData>();
+
+            foreach (Days day in data.Days)
+            {
+                if (day.Date.Year == year)
+                {
+                    val.Add(new GraphData() { Time = day.Date.DayOfYear, Amount = (day.StepsGoal * 1000) / 1000.0 });
+                }
+            }
+
+            return val;
         }
 
         public List<GraphData> GetSteps()
@@ -146,58 +253,102 @@ namespace StatMiBand.Source
 
         public double GetAverageSleep()
         {
-            return GetSleep().Where(a => a.Amount != 0).Average(a => a.Amount);
+            List<GraphData> val = GetSleep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Average(a => a.Amount);
         }
 
 
         public double GetAverageSleep(int year,int month)
         {
-            return GetSleep(year, month).Where(a => a.Amount != 0).Average(a => a.Amount);
+            List<GraphData> val = GetSleep(year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Average(a => a.Amount);
         }
 
         public double GetMinimumSleep(int year, int month)
         {
-            return GetSleep(year, month).Where(a => a.Amount != 0).Min(a => a.Amount);
+            List<GraphData> val = GetSleep(year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Min(a => a.Amount);
         }
 
         public double GetMaxmumSleep(int year, int month)
         {
-            return GetSleep(year, month).Max(a => a.Amount);
+            List<GraphData> val = GetSleep(year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Max(a => a.Amount);
         }
 
         public double GetAverageSleep(int year)
         {
-            return GetSleep(year).Where(a => a.Amount != 0).Average(a => a.Amount);
+            List<GraphData> val = GetSleep(year);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Average(a => a.Amount);
         }
 
         public double GetMinimumSleep(int year)
         {
-            return GetSleep(year).Where(a => a.Amount != 0).Min(a => a.Amount);
+            List<GraphData> val = GetSleep(year);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Min(a => a.Amount);
         }
 
         public double GetMaxmumSleep(int year)
         {
+            List<GraphData> val = GetSleep(year);
+
+            if (val.Count < 1) return 0;
+
             return GetSleep(year).Max(a => a.Amount);
         }
 
         public double GetMinimumSleep()
         {
-            return GetSleep().Where(a => a.Amount != 0).Min(a => a.Amount);
+            List<GraphData> val = GetSleep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Min(a => a.Amount);
         }
 
         public double GetMaxmumSleep()
         {
-            return GetSleep().Max(a => a.Amount);
+            List<GraphData> val = GetSleep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Max(a => a.Amount);
         }
 
         public double GetTotalSleep()
         {
-            return GetSleep().Sum(a => a.Amount);
+            List<GraphData> val = GetSleep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Sum(a => a.Amount);
         }
 
         public double GetTotalSleep(int Year)
         {
-            return GetSleep(Year).Sum(a => a.Amount);
+            List<GraphData> val = GetSleep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Sum(a => a.Amount);
         }
 
         public int GetTotalDays()
@@ -207,12 +358,20 @@ namespace StatMiBand.Source
 
         public double GetTotalSleep(int Year,int month, int day)
         {
-            return GetSleep(Year,month,day).Sum(a => a.Amount);
+            List<GraphData> val = GetSleep(Year, month,day);
+
+            if (val.Count < 1) return 0;
+
+            return val.Sum(a => a.Amount);
         }
 
         public double GetTotalSleep(int Year, int month)
         {
-            return GetSleep(Year, month).Sum(a => a.Amount);
+            List<GraphData> val = GetSleep(Year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Sum(a => a.Amount);
         }
 
         public List<int> GetYearsInData()
@@ -292,68 +451,120 @@ namespace StatMiBand.Source
 
         public double GetAverageStep()
         {
-            return GetStep().Where(a => a.Amount != 0).Average(a => a.Amount);
+            List<GraphData> val = GetStep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Average(a => a.Amount);
         }
 
 
         public double GetAverageStep(int year, int month)
         {
-            return GetStep(year, month).Where(a => a.Amount != 0).Average(a => a.Amount);
+            List<GraphData> val = GetStep(year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Average(a => a.Amount);
         }
 
         public double GetMinimumStep(int year, int month)
         {
-            return GetStep(year, month).Where(a => a.Amount != 0).Min(a => a.Amount);
+            List<GraphData> val = GetStep(year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Min(a => a.Amount);
         }
 
         public double GetMaxmumStep(int year, int month)
         {
-            return GetStep(year, month).Max(a => a.Amount);
+            List<GraphData> val = GetStep(year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Max(a => a.Amount);
         }
 
         public double GetAverageStep(int year)
         {
-            return GetStep(year).Where(a => a.Amount != 0).Average(a => a.Amount);
+            List<GraphData> val = GetStep(year);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Average(a => a.Amount);
         }
 
         public double GetMinimumStep(int year)
         {
-            return GetStep(year).Where(a => a.Amount != 0).Min(a => a.Amount);
+            List<GraphData> val = GetStep(year);
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Min(a => a.Amount);
         }
 
         public double GetMaxmumStep(int year)
         {
-            return GetStep(year).Max(a => a.Amount);
+            List<GraphData> val = GetStep(year);
+
+            if (val.Count < 1) return 0;
+
+            return val.Max(a => a.Amount);
         }
 
         public double GetMinimumStep()
         {
-            return GetStep().Where(a => a.Amount != 0).Min(a => a.Amount);
+            List<GraphData> val = GetStep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Where(a => a.Amount != 0).Min(a => a.Amount);
         }
 
         public double GetMaxmumStep()
         {
-            return GetStep().Max(a => a.Amount);
+            List<GraphData> val = GetStep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Max(a => a.Amount);
         }
 
         public double GetTotalStep()
         {
+            List<GraphData> val = GetStep();
+
+            if (val.Count < 1) return 0;
+
             return GetStep().Sum(a => a.Amount);
         }
 
         public double GetTotalStep(int Year)
         {
-            return GetStep(Year).Sum(a => a.Amount);
+            List<GraphData> val = GetStep();
+
+            if (val.Count < 1) return 0;
+
+            return val.Sum(a => a.Amount);
         }
 
         public double GetTotalStep(int Year, int month, int day)
         {
-            return GetStep(Year, month, day).Sum(a => a.Amount);
+            List<GraphData> val = GetStep(Year, month, day);
+
+            if (val.Count < 1) return 0;
+
+            return val.Sum(a => a.Amount);
         }
 
         public double GetTotalStep(int Year, int month)
         {
-            return GetStep(Year, month).Sum(a => a.Amount);
+            List<GraphData> val = GetStep(Year, month);
+
+            if (val.Count < 1) return 0;
+
+            return val.Sum(a => a.Amount);
         }
 
     }

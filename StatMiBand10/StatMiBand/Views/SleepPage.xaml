@@ -74,6 +74,26 @@
                     		x:Name="ColumnChart" 
                     		VerticalAlignment="Top" 
                     		Height="350" >
+                            <Charting:Chart.Palette>
+                                <Charting:ResourceDictionaryCollection>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Blue" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Red" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Green" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                </Charting:ResourceDictionaryCollection>
+                            </Charting:Chart.Palette>
+
                             <Charting:ColumnSeries 
                     			IndependentValuePath="Name" 
                     			DependentValuePath="Amount" 
@@ -99,6 +119,11 @@
                                             <Setter Property="Background" Value="Red" />
                                         </Style>
                                     </ResourceDictionary>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Green" />
+                                        </Style>
+                                    </ResourceDictionary>
                                 </Charting:ResourceDictionaryCollection>
                             </Charting:Chart.Palette>
 
@@ -122,10 +147,10 @@
                         </Border>
                         <Border BorderBrush="Gray" BorderThickness="2" Height="300">
                             <StackPanel Height="300">
+                                <TextBlock x:Name="TotalSleep" Text="Total sleep"/>
                                 <TextBlock x:Name="AverageSleep" Text="Average sleep "/>
                                 <TextBlock x:Name="MinimumSleep" Text="Minimum sleep"/>
                                 <TextBlock x:Name="MaximumSleep" Text="Maximum sleep"/>
-                                <TextBlock x:Name="TotalSleep" Text="Total sleep"/>
                                 <Charting:Chart x:Name="TotalPieChart" Height="210" Width="312">
                                     <Charting:PieSeries 
                             		IndependentValuePath="DataName" 

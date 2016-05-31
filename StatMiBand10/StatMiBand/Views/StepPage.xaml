@@ -74,6 +74,26 @@
                     		x:Name="ColumnChart" 
                     		VerticalAlignment="Top" 
                     		Height="350" >
+                            <Charting:Chart.Palette>
+                                <Charting:ResourceDictionaryCollection>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Blue" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Red" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary>
+                                        <Style x:Key="DataPointStyle" TargetType="Control">
+                                            <Setter Property="Background" Value="Green" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                </Charting:ResourceDictionaryCollection>
+                            </Charting:Chart.Palette>
+
                             <Charting:ColumnSeries 
                     			IndependentValuePath="Name" 
                     			DependentValuePath="Amount" 
@@ -120,18 +140,12 @@
                                 <TextBlock x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
-                        <Border BorderBrush="Gray" BorderThickness="2" Height="300">
+                        <Border BorderBrush="Gray" BorderThickness="2" Height="90">
                             <StackPanel Height="300">
+                                <TextBlock x:Name="TotalStep" Text="Total step"/>
                                 <TextBlock x:Name="AverageStep" Text="Average step "/>
                                 <TextBlock x:Name="MinimumStep" Text="Minimum step"/>
                                 <TextBlock x:Name="MaximumStep" Text="Maximum step"/>
-                                <TextBlock x:Name="TotalStep" Text="Total step"/>
-                                <Charting:Chart x:Name="TotalPieChart" Height="210" Width="312">
-                                    <Charting:PieSeries 
-                            		IndependentValuePath="DataName" 
-                            		DependentValuePath="DataValue" 
-                            		IsSelectionEnabled="True" HorizontalAlignment="Left" Width="168" Height="200" Margin="0,-37,0,-23" VerticalAlignment="Bottom"/>
-                                </Charting:Chart>
                             </StackPanel>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="2">
