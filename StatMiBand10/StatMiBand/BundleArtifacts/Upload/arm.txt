@@ -1,0 +1,1 @@
+MainPackage=C:\Work\MiBandStatistic\StatMiBand10\StatMiBand\bin\ARM\Release\Upload\StatMiBand_1.1.3.0_ARM.appx

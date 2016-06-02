@@ -17,8 +17,11 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>StatMiBand_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>6C8544747B834107E2C6C49BD3B8B1EBC50838FE</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>StatMiBand_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>0AF32225DAC77EE01DD5772723292A4A713A546F</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
